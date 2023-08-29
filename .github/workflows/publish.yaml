@@ -9,14 +9,11 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/setup-go@v4
         with:
           go-version-file: "go.mod"
-
-      - uses: actions/checkout@v3
-
-      - uses: imjasonh/setup-ko@v0.6
-
+      - uses: ko-build/setup-ko@v0.6
       - run: |
           echo "${{ secrets.PACKAGES_TOKEN }}" | ko login ghcr.io --username "user" --password-stdin
 
