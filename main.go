@@ -3,12 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/carto-run/fake-jenkins/constants"
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"time"
+
+	"github.com/carto-run/fake-jenkins/constants"
 
 	"github.com/goji/httpauth"
 	"github.com/gorilla/mux"
@@ -76,10 +78,16 @@ func main() {
 
 	if certFile != "" && keyFile != "" {
 		servingScheme = "https"
-		log.Fatal(srv.ListenAndServeTLS(certFile, keyFile))
+		if err := srv.ListenAndServeTLS(certFile, keyFile); err != nil {
+			log.Printf("error setting %s: %v", servingScheme, err)
+			os.Exit(1)
+		}
 	} else {
 		servingScheme = "http"
-		log.Fatal(srv.ListenAndServe())
+		if err := srv.ListenAndServe(); err != nil {
+			log.Printf("error setting %s: %v", servingScheme, err)
+			os.Exit(1)
+		}
 	}
 }
 

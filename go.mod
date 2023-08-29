@@ -1,6 +1,6 @@
 module github.com/carto-run/fake-jenkins
 
-go 1.18
+go 1.20
 
 require github.com/golangci/golangci-lint v1.54.2
 

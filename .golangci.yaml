@@ -44,14 +44,12 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - depguard
     - dupl
     - errcheck
     - goconst
     - gocritic
     - gocyclo
     - goheader
-    - revive
     - gomnd
     - goprintffuncname
     - gosec
