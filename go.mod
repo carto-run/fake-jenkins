@@ -7,7 +7,7 @@ require github.com/golangci/golangci-lint v1.55.1
 require (
 	github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d
 	github.com/gorilla/mux v1.8.0
-	github.com/onsi/ginkgo/v2 v2.13.0
+	github.com/onsi/ginkgo/v2 v2.13.2
 )
 
 require (
@@ -182,7 +182,7 @@ require (
 	golang.org/x/exp/typeparams v0.0.0-20230307190834-24139beb5833 // indirect
 	golang.org/x/mod v0.13.0 // indirect
 	golang.org/x/sync v0.4.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/tools v0.14.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
