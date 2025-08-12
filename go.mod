@@ -6,7 +6,7 @@ require github.com/golangci/golangci-lint v1.55.1
 
 require (
 	github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/onsi/ginkgo/v2 v2.13.0
 )
 
