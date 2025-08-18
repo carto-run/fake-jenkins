@@ -19,4 +19,5 @@ jobs:
 
           ko publish --bare ./
         env:
+          GITHUB_TOKEN: ${ secrets.PACKAGES_TOKEN }
           KO_DOCKER_REPO: ghcr.io/carto-run/fake-jenkins # Setting this forces ko to skip the default login 
