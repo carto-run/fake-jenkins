@@ -24,7 +24,7 @@ jobs:
 
       - name: ko publish
         env:
-          auth_token: "${{ secrets.PACKAGES_TOKEN }}"
+          auth_token: "${{ secrets.GITHUB_TOKEN }}"
         run: |
           echo "${auth_token}" | ko login ghcr.io --username "user" --password-stdin
 
