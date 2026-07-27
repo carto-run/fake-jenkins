@@ -198,7 +198,6 @@ func JobInfoHandler(w http.ResponseWriter, r *http.Request) {
 func BuildHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
-	log.Println("scheduling job", name)
 
 	nextIndex := len(buildInfo) + 1
 	buildInfo[nextIndex] = BuildInfo{Job: name}
@@ -217,14 +216,12 @@ func BuildHandler(w http.ResponseWriter, r *http.Request) {
 func BuildHandlerWithParameters(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
-	log.Println("scheduling job with parameters", name)
 	var location url.URL
 
 	err := r.ParseForm()
 	if err != nil {
 		panic(err)
 	}
-	log.Println("Params", len(r.Form))
 
 	nextIndex := len(buildInfo) + 1
 	buildInfo[nextIndex] = BuildInfo{Job: name, Parameters: r.Form}
@@ -242,11 +239,15 @@ func BuildHandlerWithParameters(w http.ResponseWriter, r *http.Request) {
 
 func QueueInfoHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	body := fmt.Sprintf(`{"executable":{"number":%s}}`, id)
+	body := fmt.Sprintf(`{"executable":{"number":%d}}`, id)
 	fmt.Println(body)
 	fmt.Fprint(w, body)
 }
@@ -284,7 +285,7 @@ func BuildLogHandler(w http.ResponseWriter, r *http.Request) {
 func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Do stuff here
-		log.Println(r.RequestURI)
+		log.Println(strconv.Quote(r.RequestURI))
 		// Call the next handler, which can be another middleware in the chain, or the final handler.
 		next.ServeHTTP(w, r)
 	})
